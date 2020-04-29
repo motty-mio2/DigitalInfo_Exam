@@ -1,0 +1,101 @@
+#! /usr/bin/vvp
+:ivl_version "10.1 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 9;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x7fffd1f9f050 .scope module, "SR_LAT_TEST" "SR_LAT_TEST" 2 29;
+ .timescale -9 -9;
+P_0x7fffd1f9b230 .param/l "CYCLE" 0 2 30, +C4<00000000000000000000000000000101>;
+v0x7fffd1fbfbb0_0 .net "Q", 0 0, L_0x7fffd1fc0200;  1 drivers
+v0x7fffd1fbfc70_0 .net "QG", 0 0, L_0x7fffd1fc05e0;  1 drivers
+v0x7fffd1fbfd40_0 .net "nQ", 0 0, L_0x7fffd1fc0450;  1 drivers
+v0x7fffd1fbfe40_0 .net "nQG", 0 0, L_0x7fffd1fc0740;  1 drivers
+v0x7fffd1fbff10_0 .var "nR", 0 0;
+v0x7fffd1fc0050_0 .var "nS", 0 0;
+S_0x7fffd1f9f1d0 .scope module, "SR" "SR_LAT" 2 64, 2 11 0, S_0x7fffd1f9f050;
+ .timescale -9 -9;
+    .port_info 0 /INPUT 1 "nS"
+    .port_info 1 /INPUT 1 "nR"
+    .port_info 2 /OUTPUT 1 "Q"
+    .port_info 3 /OUTPUT 1 "nQ"
+L_0x7fffd1fc0140 .functor AND 1, v0x7fffd1fc0050_0, L_0x7fffd1fc0450, C4<1>, C4<1>;
+L_0x7fffd1fc03e0 .functor AND 1, v0x7fffd1fbff10_0, L_0x7fffd1fc0200, C4<1>, C4<1>;
+v0x7fffd1f9f350_0 .net "Q", 0 0, L_0x7fffd1fc0200;  alias, 1 drivers
+v0x7fffd1fbf130_0 .net *"_s0", 0 0, L_0x7fffd1fc0140;  1 drivers
+v0x7fffd1fbf210_0 .net *"_s4", 0 0, L_0x7fffd1fc03e0;  1 drivers
+v0x7fffd1fbf2d0_0 .net "nQ", 0 0, L_0x7fffd1fc0450;  alias, 1 drivers
+v0x7fffd1fbf390_0 .net "nR", 0 0, v0x7fffd1fbff10_0;  1 drivers
+v0x7fffd1fbf4a0_0 .net "nS", 0 0, v0x7fffd1fc0050_0;  1 drivers
+L_0x7fffd1fc0200 .delay 1 (1,1,1) L_0x7fffd1fc0200/d;
+L_0x7fffd1fc0200/d .reduce/nor L_0x7fffd1fc0140;
+L_0x7fffd1fc0450 .delay 1 (1,1,1) L_0x7fffd1fc0450/d;
+L_0x7fffd1fc0450/d .reduce/nor L_0x7fffd1fc03e0;
+S_0x7fffd1fbf5e0 .scope module, "SRG" "SR_LAT_GATE" 2 65, 2 20 0, S_0x7fffd1f9f050;
+ .timescale -9 -9;
+    .port_info 0 /INPUT 1 "nS"
+    .port_info 1 /INPUT 1 "nR"
+    .port_info 2 /OUTPUT 1 "Q"
+    .port_info 3 /OUTPUT 1 "nQ"
+L_0x7fffd1fc05e0/d .functor NAND 1, v0x7fffd1fc0050_0, L_0x7fffd1fc0740, C4<1>, C4<1>;
+L_0x7fffd1fc05e0 .delay 1 (1,1,1) L_0x7fffd1fc05e0/d;
+L_0x7fffd1fc0740/d .functor NAND 1, v0x7fffd1fbff10_0, L_0x7fffd1fc05e0, C4<1>, C4<1>;
+L_0x7fffd1fc0740 .delay 1 (1,1,1) L_0x7fffd1fc0740/d;
+v0x7fffd1fbf840_0 .net "Q", 0 0, L_0x7fffd1fc05e0;  alias, 1 drivers
+v0x7fffd1fbf900_0 .net "nQ", 0 0, L_0x7fffd1fc0740;  alias, 1 drivers
+v0x7fffd1fbf9c0_0 .net "nR", 0 0, v0x7fffd1fbff10_0;  alias, 1 drivers
+v0x7fffd1fbfa90_0 .net "nS", 0 0, v0x7fffd1fc0050_0;  alias, 1 drivers
+    .scope S_0x7fffd1f9f050;
+T_0 ;
+    %vpi_call 2 36 "$dumpfile", "SR_LAT_and_test.vcd" {0 0 0};
+    %vpi_call 2 37 "$dumpvars", 32'sb00000000000000000000000000000000 {0 0 0};
+    %vpi_call 2 38 "$monitor", "%4t nS:%b nR:%b Q:%b nQ:%b QG:%b nQG:%b", $time, v0x7fffd1fc0050_0, v0x7fffd1fbff10_0, v0x7fffd1fbfbb0_0, v0x7fffd1fbfd40_0, v0x7fffd1fbfc70_0, v0x7fffd1fbfe40_0 {0 0 0};
+    %delay 0, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x7fffd1fc0050_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x7fffd1fbff10_0, 0, 1;
+    %delay 5, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x7fffd1fbff10_0, 0, 1;
+    %delay 5, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x7fffd1fbff10_0, 0, 1;
+    %delay 5, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x7fffd1fc0050_0, 0, 1;
+    %delay 5, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x7fffd1fc0050_0, 0, 1;
+    %delay 5, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x7fffd1fc0050_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x7fffd1fbff10_0, 0, 1;
+    %delay 5, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x7fffd1fc0050_0, 0, 1;
+    %delay 1, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x7fffd1fbff10_0, 0, 1;
+    %delay 4, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x7fffd1fc0050_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x7fffd1fbff10_0, 0, 1;
+    %delay 5, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x7fffd1fc0050_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x7fffd1fbff10_0, 0, 1;
+    %delay 15, 0;
+    %vpi_call 2 60 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "SR_LAT_and_test.v";
