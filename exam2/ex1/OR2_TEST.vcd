@@ -1,0 +1,34 @@
+$date
+	Mon May 18 10:05:36 2020
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module OR2_TEST $end
+$var wire 1 ! L $end
+$var reg 1 " SW0 $end
+$var reg 1 # SW1 $end
+$scope module A $end
+$var wire 1 ! L $end
+$var wire 1 " SW0 $end
+$var wire 1 # SW1 $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+0#
+0"
+0!
+$end
+#10
+1!
+1"
+#20
+1#
+#30
+0"
+#40
