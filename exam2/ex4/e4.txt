@@ -1,0 +1,9 @@
+VCD info: dumpfile FA_TEST.vcd opened for output.
+   0 a:0 b:0 ci:0 s:0 co:0
+  10 a:1 b:0 ci:0 s:1 co:0
+  20 a:1 b:1 ci:0 s:0 co:1
+  30 a:0 b:1 ci:0 s:1 co:0
+  40 a:0 b:0 ci:1 s:1 co:0
+  50 a:1 b:0 ci:1 s:0 co:1
+  60 a:1 b:1 ci:1 s:1 co:1
+  70 a:0 b:1 ci:1 s:0 co:1
