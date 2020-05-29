@@ -1,5 +1,5 @@
 $date
-	Thu May 21 16:24:07 2020
+	Sun May 24 14:05:45 2020
 $end
 $version
 	Icarus Verilog
@@ -13,8 +13,8 @@ $var reg 1 " SW0 $end
 $var reg 1 # SW1 $end
 $scope module A $end
 $var wire 1 ! L $end
-$var wire 1 # SW0 $end
-$var wire 1 " SW1 $end
+$var wire 1 " SW0 $end
+$var wire 1 # SW1 $end
 $upscope $end
 $upscope $end
 $enddefinitions $end
@@ -25,11 +25,11 @@ $dumpvars
 0!
 $end
 #10
-1"
+1#
 #20
 1!
-1#
+1"
 #30
 0!
-0"
+0#
 #40

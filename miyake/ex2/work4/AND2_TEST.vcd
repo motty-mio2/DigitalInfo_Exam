@@ -1,5 +1,5 @@
 $date
-	Thu May 21 16:24:07 2020
+	Sun May 24 16:09:07 2020
 $end
 $version
 	Icarus Verilog
@@ -11,15 +11,18 @@ $scope module AND2_TEST $end
 $var wire 1 ! L $end
 $var reg 1 " SW0 $end
 $var reg 1 # SW1 $end
+$var reg 1 $ SW2 $end
 $scope module A $end
 $var wire 1 ! L $end
-$var wire 1 # SW0 $end
-$var wire 1 " SW1 $end
+$var wire 1 " SW0 $end
+$var wire 1 # SW1 $end
+$var wire 1 $ SW2 $end
 $upscope $end
 $upscope $end
 $enddefinitions $end
 #0
 $dumpvars
+0$
 0#
 0"
 0!
@@ -27,9 +30,11 @@ $end
 #10
 1"
 #20
-1!
 1#
 #30
+1!
+1$
+#40
 0!
 0"
-#40
+#50

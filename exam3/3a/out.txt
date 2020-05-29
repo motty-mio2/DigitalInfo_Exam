@@ -1,0 +1,8 @@
+VCD info: dumpfile AND2_TEST.vcd opened for output.
+   0 G:1 D:1 Q:1
+  10 G:1 D:0 Q:0
+  20 G:1 D:1 Q:1
+  30 G:0 D:1 Q:1
+  40 G:0 D:0 Q:1
+  50 G:0 D:1 Q:1
+  60 G:0 D:0 Q:1

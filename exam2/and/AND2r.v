@@ -16,7 +16,7 @@ module AND2_TEST;
   reg SW0,SW1;
   wire L;
 
-  AND2 A(SW0,SW1,L);
+  AND2 A(SW1,SW0,L);
   initial begin
     $dumpfile("AND2_TEST.vcd");
     $dumpvars(0);

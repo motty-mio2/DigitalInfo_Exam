@@ -1,0 +1,12 @@
+VCD info: dumpfile ff.vcd opened for output.
+   0 CK:0 D:1 Qa:x Qi:x
+   5 CK:0 D:0 Qa:x Qi:x
+  10 CK:1 D:0 Qa:0 Qi:0
+  15 CK:1 D:1 Qa:0 Qi:0
+  20 CK:0 D:1 Qa:0 Qi:0
+  25 CK:0 D:0 Qa:0 Qi:0
+  27 CK:0 D:1 Qa:0 Qi:0
+  30 CK:1 D:1 Qa:1 Qi:1
+  35 CK:1 D:0 Qa:1 Qi:1
+  40 CK:0 D:0 Qa:1 Qi:1
+  50 CK:1 D:0 Qa:0 Qi:0

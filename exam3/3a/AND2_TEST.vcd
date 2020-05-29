@@ -1,0 +1,41 @@
+$date
+	Thu May 28 21:12:26 2020
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module latch_test $end
+$var wire 1 ! Q $end
+$var reg 1 " D $end
+$var reg 1 # G $end
+$scope module l $end
+$var wire 1 " D $end
+$var wire 1 # G $end
+$var reg 1 ! Q $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+1#
+1"
+1!
+$end
+#10
+0!
+0"
+#20
+1!
+1"
+#30
+0#
+#40
+0"
+#50
+1"
+#60
+0"
+#70
