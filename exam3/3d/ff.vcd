@@ -1,5 +1,5 @@
 $date
-	Fri May 29 11:20:20 2020
+	Sat May 30 15:37:38 2020
 $end
 $version
 	Icarus Verilog
@@ -75,8 +75,9 @@ $end
 0%
 1&
 0#
+#45
+1%
+1$
 #50
-0"
-0!
 0&
 1#

@@ -6,65 +6,64 @@
 :vpi_module "vhdl_sys";
 :vpi_module "v2005_math";
 :vpi_module "va_math";
-S_0x7fffcc686d50 .scope module, "ff_test" "ff_test" 2 13;
+S_0x7fffc01ffcf0 .scope module, "ff_test" "ff_test" 2 10;
  .timescale 0 0;
-v0x7fffcc6a73b0_0 .var "CK", 0 0;
-v0x7fffcc6a7480_0 .var "D", 0 0;
-v0x7fffcc6a7550_0 .net "Q", 0 0, v0x7fffcc6a7290_0;  1 drivers
-S_0x7fffcc686ed0 .scope module, "f" "pe_ffa" 2 17, 2 1 0, S_0x7fffcc686d50;
+v0x7fffc0220330_0 .var "CK", 0 0;
+v0x7fffc0220400_0 .var "D", 0 0;
+v0x7fffc02204d0_0 .net "Q", 0 0, v0x7fffc0220210_0;  1 drivers
+S_0x7fffc01ffe70 .scope module, "f" "pe_ffa" 2 14, 2 1 0, S_0x7fffc01ffcf0;
  .timescale 0 0;
     .port_info 0 /INPUT 1 "CK"
     .port_info 1 /INPUT 1 "D"
     .port_info 2 /OUTPUT 1 "Q"
-v0x7fffcc687110_0 .net "CK", 0 0, v0x7fffcc6a73b0_0;  1 drivers
-v0x7fffcc6a71d0_0 .net "D", 0 0, v0x7fffcc6a7480_0;  1 drivers
-v0x7fffcc6a7290_0 .var "Q", 0 0;
-E_0x7fffcc680830 .event posedge, v0x7fffcc687110_0;
-    .scope S_0x7fffcc686ed0;
+v0x7fffc02000b0_0 .net "CK", 0 0, v0x7fffc0220330_0;  1 drivers
+v0x7fffc0220150_0 .net "D", 0 0, v0x7fffc0220400_0;  1 drivers
+v0x7fffc0220210_0 .var "Q", 0 0;
+E_0x7fffc01f9830 .event posedge, v0x7fffc02000b0_0;
+    .scope S_0x7fffc01ffe70;
 T_0 ;
-    %wait E_0x7fffcc680830;
-    %load/vec4 v0x7fffcc6a71d0_0;
-    %flag_set/vec4 8;
-    %jmp/0xz  T_0.0, 8;
-    %load/vec4 v0x7fffcc6a71d0_0;
-    %store/vec4 v0x7fffcc6a7290_0, 0, 1;
-T_0.0 ;
+    %wait E_0x7fffc01f9830;
+    %load/vec4 v0x7fffc0220150_0;
+    %store/vec4 v0x7fffc0220210_0, 0, 1;
     %jmp T_0;
     .thread T_0;
-    .scope S_0x7fffcc686d50;
+    .scope S_0x7fffc01ffcf0;
 T_1 ;
-    %vpi_call 2 20 "$dumpfile", "ff.vcd" {0 0 0};
-    %vpi_call 2 21 "$dumpvars", 32'sb00000000000000000000000000000000 {0 0 0};
-    %vpi_call 2 22 "$monitor", "%4t CK:%b D:%b Q:%b", $time, v0x7fffcc6a73b0_0, v0x7fffcc6a7480_0, v0x7fffcc6a7550_0 {0 0 0};
+    %vpi_call 2 17 "$dumpfile", "ff.vcd" {0 0 0};
+    %vpi_call 2 18 "$dumpvars", 32'sb00000000000000000000000000000000 {0 0 0};
+    %vpi_call 2 19 "$monitor", "%4t CK:%b D:%b Q:%b", $time, v0x7fffc0220330_0, v0x7fffc0220400_0, v0x7fffc02204d0_0 {0 0 0};
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x7fffc0220330_0, 0, 1;
     %pushi/vec4 1, 0, 1;
-    %store/vec4 v0x7fffcc6a73b0_0, 0, 1;
-    %pushi/vec4 1, 0, 1;
-    %store/vec4 v0x7fffcc6a7480_0, 0, 1;
+    %store/vec4 v0x7fffc0220400_0, 0, 1;
     %delay 5, 0;
     %pushi/vec4 0, 0, 1;
-    %store/vec4 v0x7fffcc6a7480_0, 0, 1;
+    %store/vec4 v0x7fffc0220400_0, 0, 1;
     %delay 10, 0;
     %pushi/vec4 1, 0, 1;
-    %store/vec4 v0x7fffcc6a7480_0, 0, 1;
+    %store/vec4 v0x7fffc0220400_0, 0, 1;
     %delay 10, 0;
     %pushi/vec4 0, 0, 1;
-    %store/vec4 v0x7fffcc6a7480_0, 0, 1;
+    %store/vec4 v0x7fffc0220400_0, 0, 1;
     %delay 2, 0;
     %pushi/vec4 1, 0, 1;
-    %store/vec4 v0x7fffcc6a7480_0, 0, 1;
+    %store/vec4 v0x7fffc0220400_0, 0, 1;
     %delay 8, 0;
     %pushi/vec4 0, 0, 1;
-    %store/vec4 v0x7fffcc6a7480_0, 0, 1;
-    %delay 15, 0;
-    %vpi_call 2 31 "$finish" {0 0 0};
+    %store/vec4 v0x7fffc0220400_0, 0, 1;
+    %delay 10, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x7fffc0220400_0, 0, 1;
+    %delay 5, 0;
+    %vpi_call 2 29 "$finish" {0 0 0};
     %end;
     .thread T_1;
-    .scope S_0x7fffcc686d50;
+    .scope S_0x7fffc01ffcf0;
 T_2 ;
     %delay 10, 0;
-    %load/vec4 v0x7fffcc6a73b0_0;
+    %load/vec4 v0x7fffc0220330_0;
     %inv;
-    %assign/vec4 v0x7fffcc6a73b0_0, 0;
+    %assign/vec4 v0x7fffc0220330_0, 0;
     %jmp T_2;
     .thread T_2;
 # The file index is used to find the file name in the following table.

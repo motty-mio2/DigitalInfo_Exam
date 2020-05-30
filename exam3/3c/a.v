@@ -1,13 +1,10 @@
 module pe_ffa(CK,D,Q);
     input CK,D;
     output Q;
-    reg  Q;
+    reg Q;
 
     always @ (posedge CK)
-    begin
-        if(D)
-            Q=D;
-    end
+    Q=D;
 endmodule
 
 module ff_test;
@@ -28,7 +25,8 @@ module ff_test;
         #10 D = 0;
         #2 D = 1;
         #8 D = 0;
-        #15 $finish;
+        #10 D = 1;
+        #5 $finish;
     end                // シミュレーションの終了指示
 
     always #10

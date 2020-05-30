@@ -12,11 +12,10 @@ module pe_ffi(CK,D,Q);
     input CK,D;
     output Q;
     //reg  Q;
-    wire q1,Q;
+    wire q1;
 
-    latch l1(!CK,D,q1);
+    latch l1(~CK,D,q1);
     latch l2(CK,q1,Q);
-
 endmodule
 
 module ff_test;
