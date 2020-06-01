@@ -32,7 +32,7 @@ module AND2_TEST;
     #10 SW0 = 1;
     #10 SW1 = 1;
     #10 SW0 = 0;
-     #10 $finish;
+    #10 $finish;
   end                // シミュレーションの終了指示
 
 endmodule

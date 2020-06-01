@@ -1,5 +1,5 @@
 $date
-	Sat May 30 15:37:49 2020
+	Sat May 30 23:38:54 2020
 $end
 $version
 	Icarus Verilog
@@ -14,59 +14,64 @@ $var reg 1 # D $end
 $scope module l $end
 $var wire 1 " CK $end
 $var wire 1 # D $end
-$var wire 1 $ q1 $end
 $var wire 1 ! Q $end
+$var wire 1 $ q1 $end
 $scope module l1 $end
 $var wire 1 # D $end
 $var wire 1 % G $end
-$var reg 1 $ Q $end
+$var reg 1 & Q $end
 $upscope $end
 $scope module l2 $end
 $var wire 1 $ D $end
 $var wire 1 " G $end
-$var reg 1 ! Q $end
+$var reg 1 ' Q $end
 $upscope $end
 $upscope $end
 $upscope $end
 $enddefinitions $end
 #0
 $dumpvars
+x'
+1&
 1%
-1$
+z$
 1#
 0"
 x!
 $end
 #5
-0$
+0&
 0#
 #10
 0%
 0!
+z'
 1"
 #15
 1#
 #20
-1$
+1!
+1&
 1%
 0"
 #25
-0$
+0!
+0&
 0#
 #27
-1$
+1!
+1&
 1#
 #30
 0%
-1!
 1"
 #35
 0#
 #40
-0$
+0!
+0&
 1%
 0"
 #50
 0%
-0!
 1"

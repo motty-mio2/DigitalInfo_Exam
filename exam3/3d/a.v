@@ -21,7 +21,7 @@ endmodule
 module pe_ffa(CK,D,Q);
     input CK,D;
     output Q;
-    reg  Q;
+    reg Q;
 
     always @ (posedge CK)
     Q=D;

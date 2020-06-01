@@ -1,0 +1,20 @@
+VCD info: dumpfile AND3_TEST.vcd opened for output.
+                   0 D:0 CK:0 Qi:x Qa:x
+                   5 D:1 CK:0 Qi:x Qa:x
+                  10 D:1 CK:1 Qi:x Qa:1
+                  20 D:0 CK:0 Qi:1 Qa:1
+                  30 D:0 CK:1 Qi:1 Qa:0
+                  38 D:1 CK:1 Qi:1 Qa:0
+                  40 D:1 CK:0 Qi:1 Qa:0
+                  50 D:1 CK:1 Qi:1 Qa:1
+                  58 D:0 CK:1 Qi:1 Qa:1
+                  60 D:0 CK:0 Qi:0 Qa:1
+                  70 D:0 CK:1 Qi:0 Qa:0
+                  80 D:0 CK:0 Qi:0 Qa:0
+                  86 D:1 CK:0 Qi:0 Qa:0
+                  90 D:1 CK:1 Qi:0 Qa:1
+                 100 D:1 CK:0 Qi:1 Qa:1
+                 110 D:1 CK:1 Qi:1 Qa:1
+                 120 D:1 CK:0 Qi:1 Qa:1
+                 121 D:0 CK:0 Qi:1 Qa:1
+                 130 D:0 CK:1 Qi:1 Qa:0
