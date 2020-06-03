@@ -1,0 +1,5 @@
+VCD info: dumpfile bs.vcd opened for output.
+   0 A:11000111 S:0 Y:11000111
+  10 A:11000111 S:1 Y:10001110
+  20 A:11000111 S:2 Y:00011100
+  30 A:11000111 S:3 Y:00111000

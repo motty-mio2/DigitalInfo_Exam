@@ -1,8 +1,17 @@
-VCD info: dumpfile AND2_TEST.vcd opened for output.
-   0 G:1 D:1 Q:1
-  10 G:1 D:0 Q:0
-  20 G:1 D:1 Q:1
-  30 G:0 D:1 Q:1
-  40 G:0 D:0 Q:1
-  50 G:0 D:1 Q:1
-  60 G:0 D:0 Q:1
+VCD info: dumpfile pe4.vcd opened for output.
+   0 A: 0 Y:0 Valid:0
+  10 A: 1 Y:0 Valid:1
+  20 A: 2 Y:1 Valid:1
+  30 A: 3 Y:1 Valid:1
+  40 A: 4 Y:2 Valid:1
+  50 A: 5 Y:2 Valid:1
+  60 A: 6 Y:2 Valid:1
+  70 A: 7 Y:2 Valid:1
+  80 A: 8 Y:3 Valid:1
+  90 A: 9 Y:3 Valid:1
+ 100 A:10 Y:3 Valid:1
+ 110 A:11 Y:3 Valid:1
+ 120 A:12 Y:3 Valid:1
+ 130 A:13 Y:3 Valid:1
+ 140 A:14 Y:3 Valid:1
+ 150 A:15 Y:3 Valid:1

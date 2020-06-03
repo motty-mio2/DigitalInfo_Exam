@@ -1,0 +1,122 @@
+$date
+	Tue Jun  2 22:40:22 2020
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module PENC4_TEST $end
+$var wire 2 ! Y [1:0] $end
+$var wire 1 " V $end
+$var reg 4 # A [3:0] $end
+$var integer 32 $ i [31:0] $end
+$scope module P $end
+$var wire 4 % A [3:0] $end
+$var wire 2 & Y [1:0] $end
+$var wire 1 " VALID $end
+$scope function enc $end
+$var reg 8 ' a [7:0] $end
+$var reg 3 ( enc [2:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b0 (
+b0 '
+b0 &
+b0 %
+b1 $
+b0 #
+0"
+b0 !
+$end
+#10
+b1 '
+b10 $
+1"
+b1 #
+b1 %
+#20
+b1 !
+b1 &
+b1 (
+b10 '
+b11 $
+b10 #
+b10 %
+#30
+b11 '
+b100 $
+b11 #
+b11 %
+#40
+b10 !
+b10 &
+b10 (
+b100 '
+b101 $
+b100 #
+b100 %
+#50
+b101 '
+b110 $
+b101 #
+b101 %
+#60
+b110 '
+b111 $
+b110 #
+b110 %
+#70
+b111 '
+b1000 $
+b111 #
+b111 %
+#80
+b11 !
+b11 &
+b11 (
+b1000 '
+b1001 $
+b1000 #
+b1000 %
+#90
+b1001 '
+b1010 $
+b1001 #
+b1001 %
+#100
+b1010 '
+b1011 $
+b1010 #
+b1010 %
+#110
+b1011 '
+b1100 $
+b1011 #
+b1011 %
+#120
+b1100 '
+b1101 $
+b1100 #
+b1100 %
+#130
+b1101 '
+b1110 $
+b1101 #
+b1101 %
+#140
+b1110 '
+b1111 $
+b1110 #
+b1110 %
+#150
+b1111 '
+b10000 $
+b1111 #
+b1111 %
+#160

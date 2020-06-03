@@ -1,0 +1,45 @@
+$date
+	Tue Jun  2 23:05:49 2020
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module BARREL_TEST $end
+$var wire 8 ! Y [7:0] $end
+$var reg 8 " A [7:0] $end
+$var reg 2 # S [1:0] $end
+$scope module B $end
+$var wire 8 $ A [7:0] $end
+$var wire 2 % S [1:0] $end
+$var reg 8 & Y [7:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b11000111 &
+b0 %
+b11000111 $
+b0 #
+b11000111 "
+b11000111 !
+$end
+#10
+b10001110 !
+b10001110 &
+b1 #
+b1 %
+#20
+b11100 !
+b11100 &
+b10 #
+b10 %
+#30
+b111000 !
+b111000 &
+b11 #
+b11 %
+#40
