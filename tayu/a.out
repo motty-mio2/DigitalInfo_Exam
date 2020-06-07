@@ -1,0 +1,43 @@
+#! /usr/bin/vvp
+:ivl_version "10.1 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x56409b60c6c0 .scope module, "test" "test" 2 1;
+ .timescale 0 0;
+    .port_info 0 /INPUT 4 "A"
+    .port_info 1 /OUTPUT 2 "Y"
+    .port_info 2 /OUTPUT 1 "VALID"
+o0x7f6b3d19a078 .functor BUFZ 4, C4<zzzz>; HiZ drive
+v0x56409b62cbe0_0 .net "A", 3 0, o0x7f6b3d19a078;  0 drivers
+v0x56409b62cce0_0 .net "VALID", 0 0, L_0x56409b62cfe0;  1 drivers
+v0x56409b62cda0_0 .net "Y", 1 0, L_0x56409b62cee0;  1 drivers
+L_0x56409b62cee0 .ufunc TD_test.encode, 2, o0x7f6b3d19a078 (v0x56409b60ca60_0) v0x56409b62cb00_0 S_0x56409b60c890;
+L_0x56409b62cfe0 .reduce/or o0x7f6b3d19a078;
+S_0x56409b60c890 .scope function, "encode" "encode" 2 6, 2 6 0, S_0x56409b60c6c0;
+ .timescale 0 0;
+v0x56409b60ca60_0 .var "a", 3 0;
+v0x56409b62cb00_0 .var "encode", 1 0;
+TD_test.encode ;
+    %load/vec4 v0x56409b60ca60_0;
+    %parti/s 1, 3, 3;
+    %load/vec4 v0x56409b60ca60_0;
+    %parti/s 1, 2, 3;
+    %inv;
+    %load/vec4 v0x56409b60ca60_0;
+    %parti/s 1, 1, 2;
+    %and;
+    %load/vec4 v0x56409b60ca60_0;
+    %parti/s 1, 3, 3;
+    %or;
+    %concat/vec4; draw_concat_vec4
+    %store/vec4 v0x56409b62cb00_0, 0, 2;
+    %end;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "/mnt/c/Users/kouki/Documents/Projects/verilog_test/tayu/a.v";
