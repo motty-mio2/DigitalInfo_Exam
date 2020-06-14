@@ -7,11 +7,11 @@ module test(A,Y,VALID);
         input [3:0] a;
 
         /*
-        encode[1] = a[3];
+        encode[1] = a[3] | a[2];
         encode[0] = (~a[2] & a[1]) | a[3];
         */
 
-        encode = {a[3],(~a[2] & a[1]) | a[3]};
+        encode = {a[3] | a[2], (~a[2] & a[1]) | a[3]};
     endfunction
 
     assign Y = encode(A);

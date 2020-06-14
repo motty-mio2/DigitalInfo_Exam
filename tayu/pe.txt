@@ -1,0 +1,9 @@
+VCD info: dumpfile PENC4_test_2.vcd opened for output.
+   0: A = 0000, VALID = 0, Y = 0
+  10: A = 1000, VALID = 1, Y = 3
+  20: A = 1100, VALID = 1, Y = 3
+  30: A = 0100, VALID = 1, Y = 2
+  40: A = 0110, VALID = 1, Y = 2
+  50: A = 0010, VALID = 1, Y = 1
+  60: A = 0011, VALID = 1, Y = 1
+  70: A = 0001, VALID = 1, Y = 0

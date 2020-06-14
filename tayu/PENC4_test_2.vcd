@@ -1,0 +1,76 @@
+$date
+	Sun Jun  7 20:58:06 2020
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module PENC4_test_2 $end
+$var wire 2 ! Y [1:0] $end
+$var wire 1 " VALID $end
+$var reg 4 # A [3:0] $end
+$scope module pe4 $end
+$var wire 4 $ A [3:0] $end
+$var wire 2 % Y [1:0] $end
+$var wire 1 " VALID $end
+$scope function encode $end
+$var reg 4 & a [3:0] $end
+$var reg 2 ' encode [1:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b0 '
+b0 &
+b0 %
+b0 $
+b0 #
+0"
+b0 !
+$end
+#10
+b11 !
+b11 %
+b11 '
+b1000 &
+1"
+b1000 #
+b1000 $
+#20
+b1100 &
+b1100 #
+b1100 $
+#30
+b10 !
+b10 %
+b10 '
+b100 &
+b100 #
+b100 $
+#40
+b110 &
+b110 #
+b110 $
+#50
+b1 !
+b1 %
+b1 '
+b10 &
+b10 #
+b10 $
+#60
+b11 &
+b11 #
+b11 $
+#70
+b0 !
+b0 %
+b0 '
+b1 &
+b1 #
+b1 $
+#75

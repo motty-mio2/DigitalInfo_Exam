@@ -1,0 +1,53 @@
+#! /usr/bin/vvp
+:ivl_version "10.1 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x7fffec2405f0 .scope module, "comp2_test" "comp2_test" 2 9;
+ .timescale 0 0;
+v0x7fffec260c80_0 .var "A", 7 0;
+v0x7fffec260d70_0 .net "M", 7 0, L_0x7fffec260fb0;  1 drivers
+v0x7fffec260e40_0 .var/i "i", 31 0;
+S_0x7fffec240770 .scope module, "c" "comp2" 2 14, 2 2 0, S_0x7fffec2405f0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 8 "A"
+    .port_info 1 /OUTPUT 8 "M"
+L_0x7fffec23dd30 .functor NOT 8, v0x7fffec260c80_0, C4<00000000>, C4<00000000>, C4<00000000>;
+v0x7fffec240940_0 .net "A", 7 0, v0x7fffec260c80_0;  1 drivers
+v0x7fffec2609a0_0 .net "M", 7 0, L_0x7fffec260fb0;  alias, 1 drivers
+v0x7fffec260a80_0 .net *"_s0", 7 0, L_0x7fffec23dd30;  1 drivers
+L_0x7f1c2f5a0018 .functor BUFT 1, C4<00000001>, C4<0>, C4<0>, C4<0>;
+v0x7fffec260b40_0 .net/2u *"_s2", 7 0, L_0x7f1c2f5a0018;  1 drivers
+L_0x7fffec260fb0 .arith/sum 8, L_0x7fffec23dd30, L_0x7f1c2f5a0018;
+    .scope S_0x7fffec2405f0;
+T_0 ;
+    %vpi_call 2 17 "$dumpfile", "comp2.vcd" {0 0 0};
+    %vpi_call 2 18 "$dumpvars", 32'sb00000000000000000000000000000000 {0 0 0};
+    %vpi_call 2 19 "$monitor", "%4t A:%b M:%b", $time, v0x7fffec260c80_0, v0x7fffec260d70_0 {0 0 0};
+    %pushi/vec4 4294967233, 0, 32;
+    %store/vec4 v0x7fffec260e40_0, 0, 32;
+T_0.0 ;
+    %load/vec4 v0x7fffec260e40_0;
+    %cmpi/s 65, 0, 32;
+    %jmp/0xz T_0.1, 5;
+    %delay 1, 0;
+    %load/vec4 v0x7fffec260e40_0;
+    %pad/s 8;
+    %store/vec4 v0x7fffec260c80_0, 0, 8;
+    %load/vec4 v0x7fffec260e40_0;
+    %addi 1, 0, 32;
+    %store/vec4 v0x7fffec260e40_0, 0, 32;
+    %jmp T_0.0;
+T_0.1 ;
+    %delay 1, 0;
+    %vpi_call 2 28 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "/mnt/c/Users/kouki/Documents/Projects/verilog_test/exam5/ex1/a.v";
