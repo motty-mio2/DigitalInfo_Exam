@@ -1,0 +1,48 @@
+$date
+	Fri Jun 26 00:42:21 2020
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module DFF_TEST $end
+$var wire 1 ! nQ $end
+$var wire 1 " Q $end
+$var reg 1 # CK $end
+$var reg 1 $ D $end
+$var reg 1 % nCr $end
+$scope module dx $end
+$var wire 1 # CK $end
+$var wire 1 $ D $end
+$var wire 1 % nCr $end
+$var reg 1 " Q $end
+$var reg 1 ! nQ $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+1%
+1$
+0#
+x"
+x!
+$end
+#5
+0%
+#6
+1!
+0"
+1%
+#10
+1#
+#11
+0!
+1"
+#15
+0$
+#20
+0#
+#25

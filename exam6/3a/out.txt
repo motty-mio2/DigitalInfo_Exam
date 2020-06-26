@@ -1,0 +1,10 @@
+VCD info: dumpfile test.vcd opened for output.
+   0 CK:0 D:1 nCr:1 Q:x nQ:x
+   5 CK:0 D:1 nCr:0 Q:x nQ:x
+   6 CK:0 D:1 nCr:1 Q:0 nQ:1
+  10 CK:1 D:1 nCr:1 Q:0 nQ:1
+  11 CK:1 D:1 nCr:1 Q:1 nQ:0
+  15 CK:1 D:0 nCr:1 Q:1 nQ:0
+  20 CK:0 D:0 nCr:1 Q:1 nQ:0
+  30 CK:1 D:0 nCr:1 Q:1 nQ:0
+  31 CK:1 D:0 nCr:1 Q:0 nQ:1

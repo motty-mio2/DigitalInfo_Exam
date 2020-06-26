@@ -1,0 +1,101 @@
+$date
+	Wed Jun 24 16:56:01 2020
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module CNT4_TEST $end
+$var wire 2 ! QS [1:0] $end
+$var wire 2 " QA [1:0] $end
+$var reg 1 # CLK $end
+$var reg 1 $ nRES $end
+$scope module AR $end
+$var wire 1 # CLK $end
+$var wire 1 $ nRES $end
+$var reg 2 % Q [1:0] $end
+$upscope $end
+$scope module SR $end
+$var wire 1 # CLK $end
+$var wire 1 $ nRES $end
+$var reg 2 & Q [1:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx &
+b0 %
+0$
+0#
+b0 "
+bx !
+$end
+#5
+1$
+#10
+b1 "
+b1 %
+1#
+#20
+0#
+#25
+b0 "
+b0 %
+0$
+#30
+b0 !
+b0 &
+1#
+#35
+1$
+#40
+0#
+#50
+b1 "
+b1 %
+b1 !
+b1 &
+1#
+#60
+0#
+#70
+b10 "
+b10 %
+b10 !
+b10 &
+1#
+#80
+b0 "
+b0 %
+0#
+0$
+#85
+1$
+#90
+b1 "
+b1 %
+b11 !
+b11 &
+1#
+#100
+0#
+#110
+b10 "
+b10 %
+b0 !
+b0 &
+1#
+#120
+0#
+#130
+b11 "
+b11 %
+b1 !
+b1 &
+1#
+#140
+0#
+#145

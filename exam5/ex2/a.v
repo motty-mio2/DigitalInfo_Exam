@@ -1,4 +1,4 @@
-module HA (a,b,c,s);		// モジュール名と入力・出力ポート名を記述
+module HA (a,b,c,s);
   input a,b;
   output s,c;
   assign s = a^b;
