@@ -1,6 +1,5 @@
 `timescale 1 ns / 1 ns
 
-
 module DFF_AR(CK, D, nCr, Q, nQ);
     input CK, D, nCr;
     output Q, nQ;
@@ -19,27 +18,28 @@ endmodule
 module BCD_CNT_A(CK, nClear, Q); // CK：クロック入力，nClear：負論理リセット入力，Q：カウント出力
     input CK,nClear;
     output Q;
-    //reg q1, q2, q3, q4, nq1, nq2, nq3, nq4, nq1o, nq2o, nq3o, nq4o, cflag;
-    reg cfl;
-    reg q1,nq1,nq1o;
 
-    cfl = 1;
+    function bcd;
+        input CK, nClear;
+        reg q1, q2, q3, q4, nq1, nq2, nq3, nq4, nq1o, nq2o, nq3o, nq4o;
+        reg cfl;
+        cfl = ~(~nClear | (q1 & q4));
 
-    if(~nClear || (q1 && q4))
-        cfl = 0;
+        DFF_AR l1(.CK(CK) , .D(nq1o), .nCr(cfl), .Q(q1), .nQ(nq1));
 
-    DFF_AR l1(.CK(CK) , .D(nq1o), .nCr(cfl), .Q(q1), .nQ(nq1));
-    nq1o = nq1;
-    DFF_AR l2(nq1, nq2o, cflag, q2, nq2);
-    DFF_AR l3(nq2, nq3o, cflag, q3, nq3);
-    DFF_AR l4(nq3, nq4o, cflag, q4, nq4);
+        DFF_AR l2(nq1, nq2o, cflag, q2, nq2);
+        DFF_AR l3(nq2, nq3o, cflag, q3, nq3);
+        DFF_AR l4(nq3, nq4o, cflag, q4, nq4);
 
+        nq1o = nq1;
+        nq2o = nq2;
+        nq3o = nq3;
+        nq4o = nq4;
 
-    nq2o = nq2;
-    nq3o = nq3;
-    nq4o = nq4;
+        bcd = q4;
+    endfunction
 
-    assign Q = q4;
+    assign Q = bcd(CK,nClear);
 
 endmodule
 
