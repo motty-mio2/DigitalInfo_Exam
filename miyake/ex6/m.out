@@ -1,0 +1,123 @@
+#! /usr/bin/vvp
+:ivl_version "10.1 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 9;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x7fffe4162270 .scope module, "bcd_test" "bcd_test" 2 21;
+ .timescale -9 -9;
+P_0x7fffe41623f0 .param/l "CYCLE" 0 2 22, +C4<00000000000000000000000000010100>;
+v0x7fffe4182a60_0 .var "AR", 0 0;
+v0x7fffe4182b50_0 .var "CE", 0 0;
+v0x7fffe4182c20_0 .var "CK", 0 0;
+v0x7fffe4182d20_0 .net "CO", 0 0, v0x7fffe41827d0_0;  1 drivers
+v0x7fffe4182df0_0 .net "Q", 3 0, v0x7fffe4182890_0;  1 drivers
+S_0x7fffe4162490 .scope module, "bc" "BCD_COUNT" 2 27, 2 3 0, S_0x7fffe4162270;
+ .timescale -9 -9;
+    .port_info 0 /INPUT 1 "CK"
+    .port_info 1 /INPUT 1 "CE"
+    .port_info 2 /INPUT 1 "AR"
+    .port_info 3 /OUTPUT 1 "CO"
+    .port_info 4 /OUTPUT 4 "Q"
+v0x7fffe41626e0_0 .net "AR", 0 0, v0x7fffe4182a60_0;  1 drivers
+v0x7fffe4182640_0 .net "CE", 0 0, v0x7fffe4182b50_0;  1 drivers
+v0x7fffe4182700_0 .net "CK", 0 0, v0x7fffe4182c20_0;  1 drivers
+v0x7fffe41827d0_0 .var "CO", 0 0;
+v0x7fffe4182890_0 .var "Q", 3 0;
+E_0x7fffe4156840/0 .event negedge, v0x7fffe41626e0_0;
+E_0x7fffe4156840/1 .event posedge, v0x7fffe4182700_0;
+E_0x7fffe4156840 .event/or E_0x7fffe4156840/0, E_0x7fffe4156840/1;
+    .scope S_0x7fffe4162490;
+T_0 ;
+    %wait E_0x7fffe4156840;
+    %load/vec4 v0x7fffe41626e0_0;
+    %inv;
+    %load/vec4 v0x7fffe4182890_0;
+    %parti/s 1, 3, 3;
+    %load/vec4 v0x7fffe4182890_0;
+    %parti/s 1, 0, 2;
+    %and;
+    %load/vec4 v0x7fffe4182640_0;
+    %and;
+    %or;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_0.0, 8;
+    %pushi/vec4 0, 0, 4;
+    %store/vec4 v0x7fffe4182890_0, 0, 4;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/vec4 v0x7fffe4182640_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_0.2, 8;
+    %load/vec4 v0x7fffe4182890_0;
+    %addi 1, 0, 4;
+    %store/vec4 v0x7fffe4182890_0, 0, 4;
+T_0.2 ;
+T_0.1 ;
+    %load/vec4 v0x7fffe4182890_0;
+    %parti/s 1, 3, 3;
+    %load/vec4 v0x7fffe4182890_0;
+    %parti/s 1, 0, 2;
+    %and;
+    %load/vec4 v0x7fffe4182640_0;
+    %and;
+    %store/vec4 v0x7fffe41827d0_0, 0, 1;
+    %jmp T_0;
+    .thread T_0;
+    .scope S_0x7fffe4162270;
+T_1 ;
+    %vpi_call 2 30 "$dumpfile", "testm.vcd" {0 0 0};
+    %vpi_call 2 31 "$dumpvars", 32'sb00000000000000000000000000000000 {0 0 0};
+    %vpi_call 2 32 "$monitor", "%4t CK:%b CE:%b AR:%b CO:%b Q:%b", $time, v0x7fffe4182c20_0, v0x7fffe4182b50_0, v0x7fffe4182a60_0, v0x7fffe4182d20_0, v0x7fffe4182df0_0 {0 0 0};
+    %delay 0, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x7fffe4182c20_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x7fffe4182b50_0, 0, 1;
+    %delay 5, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x7fffe4182a60_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x7fffe4182b50_0, 0, 1;
+    %delay 20, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x7fffe4182a60_0, 0, 1;
+    %delay 10, 0;
+    %delay 5, 0;
+    %delay 40, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x7fffe4182b50_0, 0, 1;
+    %delay 20, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x7fffe4182b50_0, 0, 1;
+    %delay 60, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x7fffe4182a60_0, 0, 1;
+    %delay 20, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x7fffe4182a60_0, 0, 1;
+    %delay 20, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x7fffe4182b50_0, 0, 1;
+    %delay 15, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x7fffe4182b50_0, 0, 1;
+    %delay 120, 0;
+    %vpi_call 2 57 "$finish" {0 0 0};
+    %end;
+    .thread T_1;
+    .scope S_0x7fffe4162270;
+T_2 ;
+    %delay 10, 0;
+    %load/vec4 v0x7fffe4182c20_0;
+    %inv;
+    %assign/vec4 v0x7fffe4182c20_0, 0;
+    %jmp T_2;
+    .thread T_2;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "/mnt/c/Users/kouki/Documents/Projects/verilog_test/miyake/ex6/m.v";

@@ -1,0 +1,143 @@
+$date
+	Sun Jun 28 00:31:44 2020
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module bcd_test $end
+$var wire 4 ! Q [3:0] $end
+$var wire 1 " CO $end
+$var reg 1 # AR $end
+$var reg 1 $ CE $end
+$var reg 1 % CK $end
+$scope module bc $end
+$var wire 1 # AR $end
+$var wire 1 $ CE $end
+$var wire 1 % CK $end
+$var reg 1 " CO $end
+$var reg 4 & Q [3:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx &
+0%
+0$
+x#
+x"
+bx !
+$end
+#5
+0"
+b0 !
+b0 &
+1$
+0#
+#10
+1%
+#20
+0%
+#25
+1#
+#30
+b1 !
+b1 &
+1%
+#40
+0%
+#50
+b10 !
+b10 &
+1%
+#60
+0%
+#70
+b11 !
+b11 &
+1%
+#80
+0%
+0$
+#90
+1%
+#100
+0%
+1$
+#110
+b100 !
+b100 &
+1%
+#120
+0%
+#130
+b101 !
+b101 &
+1%
+#140
+0%
+#150
+b110 !
+b110 &
+1%
+#160
+0%
+b0 !
+b0 &
+0#
+#170
+1%
+#180
+0%
+1#
+#190
+b1 !
+b1 &
+1%
+#200
+0%
+0$
+#210
+1%
+#215
+1$
+#220
+0%
+#230
+b10 !
+b10 &
+1%
+#240
+0%
+#250
+b11 !
+b11 &
+1%
+#260
+0%
+#270
+b100 !
+b100 &
+1%
+#280
+0%
+#290
+b101 !
+b101 &
+1%
+#300
+0%
+#310
+b110 !
+b110 &
+1%
+#320
+0%
+#330
+b111 !
+b111 &
+1%
+#335

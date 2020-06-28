@@ -17,36 +17,25 @@ endmodule
 
 module BCD_CNT_A(CK, nClear, Q); // CK：クロック入力，nClear：負論理リセット入力，Q：カウント出力
     input CK,nClear;
-    output Q;
+    output [3:0] Q;
 
-    function bcd;
-        input CK, nClear;
-        reg q1, q2, q3, q4, nq1, nq2, nq3, nq4, nq1o, nq2o, nq3o, nq4o;
-        reg cfl;
-        cfl = ~(~nClear | (q1 & q4));
+    wire q1, q2, q3, q4, nq1, nq2, nq3, nq4;
+    wire clear;
 
-        DFF_AR l1(.CK(CK) , .D(nq1o), .nCr(cfl), .Q(q1), .nQ(nq1));
+    assign clear = !(q2&q4)&nClear;
 
-        DFF_AR l2(nq1, nq2o, cflag, q2, nq2);
-        DFF_AR l3(nq2, nq3o, cflag, q3, nq3);
-        DFF_AR l4(nq3, nq4o, cflag, q4, nq4);
+    DFF_AR l1(CK , nq1, clear, q1, nq1);
+    DFF_AR l2(nq1, nq2, clear, q2, nq2);
+    DFF_AR l3(nq2, nq3, clear, q3, nq3);
+    DFF_AR l4(nq3, nq4, clear, q4, nq4);
 
-        nq1o = nq1;
-        nq2o = nq2;
-        nq3o = nq3;
-        nq4o = nq4;
-
-        bcd = q4;
-    endfunction
-
-    assign Q = bcd(CK,nClear);
-
+    assign Q = {q4,q3,q2,q1};
 endmodule
 
-/*
-module DFF_TEST;
+
+module BCD_TEST;
     reg CK, nClear;
-    wire Q;
+    wire [3:0] Q;
 
     BCD_CNT_A dx (CK, nClear, Q);
 
@@ -57,16 +46,15 @@ module DFF_TEST;
 
         CK = 0;
         nClear = 1;
-        #5 nClear = 0;
+        #9 nClear = 0;
         #1 nClear = 1;
-        #29 nclear = 0;
-        #100 $finish;
+
+        #25 nClear = 0;
+        #5 nClear = 1;
+        #250 $finish;
     end
 
     always #10
         CK <= ~CK;
-
-
 endmodule
 
-*/

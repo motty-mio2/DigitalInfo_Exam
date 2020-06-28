@@ -1,8 +1,59 @@
 VCD info: dumpfile test.vcd opened for output.
-   0 CK:0 D:1 nCr:1 Q:x nQ:x
-   5 CK:0 D:1 nCr:0 Q:x nQ:x
-   6 CK:0 D:1 nCr:1 Q:0 nQ:1
-  10 CK:1 D:1 nCr:1 Q:0 nQ:1
-  11 CK:1 D:1 nCr:1 Q:1 nQ:0
-  15 CK:1 D:0 nCr:1 Q:1 nQ:0
-  20 CK:0 D:0 nCr:1 Q:1 nQ:0
+   0 CK:0 nClear:1 Q:xxxx
+   9 CK:0 nClear:0 Q:xxxx
+  10 CK:1 nClear:1 Q:0000
+  11 CK:1 nClear:1 Q:1111
+  12 CK:1 nClear:1 Q:0000
+  20 CK:0 nClear:1 Q:0000
+  30 CK:1 nClear:1 Q:0000
+  31 CK:1 nClear:1 Q:0001
+  35 CK:1 nClear:0 Q:0001
+  36 CK:1 nClear:0 Q:0000
+  40 CK:0 nClear:1 Q:0000
+  50 CK:1 nClear:1 Q:0000
+  51 CK:1 nClear:1 Q:0001
+  60 CK:0 nClear:1 Q:0001
+  70 CK:1 nClear:1 Q:0001
+  71 CK:1 nClear:1 Q:0000
+  72 CK:1 nClear:1 Q:0010
+  80 CK:0 nClear:1 Q:0010
+  90 CK:1 nClear:1 Q:0010
+  91 CK:1 nClear:1 Q:0011
+ 100 CK:0 nClear:1 Q:0011
+ 110 CK:1 nClear:1 Q:0011
+ 111 CK:1 nClear:1 Q:0010
+ 112 CK:1 nClear:1 Q:0000
+ 113 CK:1 nClear:1 Q:0100
+ 120 CK:0 nClear:1 Q:0100
+ 130 CK:1 nClear:1 Q:0100
+ 131 CK:1 nClear:1 Q:0101
+ 140 CK:0 nClear:1 Q:0101
+ 150 CK:1 nClear:1 Q:0101
+ 151 CK:1 nClear:1 Q:0100
+ 152 CK:1 nClear:1 Q:0110
+ 160 CK:0 nClear:1 Q:0110
+ 170 CK:1 nClear:1 Q:0110
+ 171 CK:1 nClear:1 Q:0111
+ 180 CK:0 nClear:1 Q:0111
+ 190 CK:1 nClear:1 Q:0111
+ 191 CK:1 nClear:1 Q:0110
+ 192 CK:1 nClear:1 Q:0100
+ 193 CK:1 nClear:1 Q:0000
+ 194 CK:1 nClear:1 Q:1000
+ 200 CK:0 nClear:1 Q:1000
+ 210 CK:1 nClear:1 Q:1000
+ 211 CK:1 nClear:1 Q:1001
+ 220 CK:0 nClear:1 Q:1001
+ 230 CK:1 nClear:1 Q:1001
+ 231 CK:1 nClear:1 Q:1000
+ 232 CK:1 nClear:1 Q:1010
+ 233 CK:1 nClear:1 Q:0000
+ 240 CK:0 nClear:1 Q:0000
+ 250 CK:1 nClear:1 Q:0000
+ 251 CK:1 nClear:1 Q:0001
+ 260 CK:0 nClear:1 Q:0001
+ 270 CK:1 nClear:1 Q:0001
+ 271 CK:1 nClear:1 Q:0000
+ 272 CK:1 nClear:1 Q:0010
+ 280 CK:0 nClear:1 Q:0010
+ 290 CK:1 nClear:1 Q:0010

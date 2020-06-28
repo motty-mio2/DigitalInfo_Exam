@@ -1,20 +1,5 @@
 `timescale 1 ns / 1 ns
 
-module DFF_AR(CK, D, nCr, Q, nQ);
-    input CK, D, nCr;
-    output Q, nQ;
-    reg Q, nQ;
-
-    always @(posedge CK or negedge nCr)
-    begin
-        if(~nCr)
-            #1 Q = 0;
-        else
-            #1 Q = D;
-        nQ = ~Q;
-    end
-endmodule
-
 module BCD_COUNT(CK, CE, AR, CO, Q); // CE = 1 で CK = 0 から CK = 1 に立ち上がるとカウントアップ
     input CK, CE, AR;
     output CO;
@@ -33,31 +18,18 @@ module BCD_COUNT(CK, CE, AR, CO, Q); // CE = 1 で CK = 0 から CK = 1 に立�
     end
 endmodule
 
-module main(CK, CE, AR, CO, Q);
-    input CK, CE, AR;
-    output CO;
-    //reg CO;
-    output [3:0] Q;
-    //reg [3:0] Q;
-
-    wire GCK, nGCK;
-    DFF_AR dgl (CK, CE, 1'b1, GCK, nGCK);
-    BCD_COUNT bc (GCK&CK, CE, AR, CO, Q);
-endmodule
-
 module bcd_test;
-parameter CYCLE = 20;
+    parameter CYCLE = 20;
     reg CK ,CE, AR;
     wire CO;
-    wire [3:0] Qb, Qg;
+    wire [3:0] Q;
 
-    BCD_COUNT bc (CK, CE, AR, CO, Qb);
-    main m (CK, CE, AR, CO, Qg);
+    BCD_COUNT bc (CK, CE, AR, CO, Q);
 
     initial begin
-        $dumpfile("test.vcd");
+        $dumpfile("testm.vcd");
         $dumpvars(0);
-        $monitor("%4t CK:%b CE:%b AR:%b CO:%b Qb:%b Qg:%b",$time, CK, CE, AR, CO, Qb, Qg);
+        $monitor("%4t CK:%b CE:%b AR:%b CO:%b Q:%b",$time, CK, CE, AR, CO, Q);
 
         #0
       CK = 0;
