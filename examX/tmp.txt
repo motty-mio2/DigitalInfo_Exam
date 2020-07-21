@@ -1,0 +1,16 @@
+comp1 c3 (a[3], b[3], w3);
+    if (w3 == 2'b11) begin
+        comp1 c2 (a[2], b[2], w2);
+        if (w2 == 2'b11) begin
+            comp1 c1 (a[1], b[1], w1);
+            if (w1 == 2'b11) begin
+                comp1 c0 (a[0], b[0], s);
+            end else begin
+                assign s = w1;
+            end
+        end else begin
+            assign s = w2;
+        end
+    end else begin
+        assign s = w3;
+    end
