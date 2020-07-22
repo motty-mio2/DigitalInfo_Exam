@@ -1,3 +1,5 @@
+`timescale 1 ns / 1 ns
+
 module FA (a,b,ci,s,co);
   input a,b,ci;
   output s,co;
@@ -16,6 +18,19 @@ module FA4b5b (a, b, mo, c);
     FA f2 (a[1], b[1]^mo, c1, c[1], c2);
     FA f3 (a[2], b[2]^mo, c2, c[2], c3);
     FA f4 (a[3], b[3]^mo, c3, c[3], c[4]);
+endmodule
+
+module FA4b4b (a, b, mo, c);
+    input [3:0] a,b;
+    input mo;
+    //0:plus, 1:minus
+    output [3:0] c;
+    wire c1,c2,c3,c4;
+
+    FA f1 (a[0], b[0]^mo, mo, c[0], c1);
+    FA f2 (a[1], b[1]^mo, c1, c[1], c2);
+    FA f3 (a[2], b[2]^mo, c2, c[2], c3);
+    FA f4 (a[3], b[3]^mo, c3, c[3], c4);
 endmodule
 
 module MULIT1x4 (a,b,s);
@@ -44,59 +59,65 @@ module MULTI4b8b (a,b,s);
     assign s[2] = c2[0];
     FA4b5b f3 (.a(c2[4:1]), .b(ab3), .mo(1'b0), .c(s[7:3]));
 endmodule
-
+/*
 module comp1 (a,b,s);
     input a, b;
-    output s;
+    output [1:0] s;
 
-    if(~a&b) begin
-        assign s = 2'b01;
-    end else if (a&~b) begin
-        assign s = 2'b10;
-    end else begin
-        assign s = 2'b11;
-    end
+    function [1:0] comp1s;
+        input a,b;
+
+        if(~a&b) begin
+            assign comp1s = 2'b01;
+        end else if (a&~b) begin
+            assign comp1s = 2'b10;
+        end else begin
+            assign comp1s = 2'b11;
+        end
+    endfunction
 endmodule
-
+*/
 module comp4 (a,b,s);
     input[3:0] a,b;
     output [1:0] s;
-    wire [1:0] w0, w1, w2, w3;
-
+    //wire [1:0] w0, w1, w2, w3;
+/*
     comp1 c3 (a[3], b[3], w3);
     comp1 c2 (a[2], b[2], w2);
     comp1 c1 (a[1], b[1], w1);
     comp1 c0 (a[0], b[0], s);
-
+*/
     function [1:0] cp4;
         input [3:0] a, b;
 
         if(a[3]&~b[3]) begin
-            s = 2'b10;
+            cp4 = 2'b10;
         end else if (~a[3]&b[3]) begin
-            s = 2'b01;
+            cp4 = 2'b01;
         end else begin
             if(a[2]&~b[2]) begin
-                s = 2'b10;
+                cp4 = 2'b10;
             end else if (~a[2]&b[2]) begin
-                s = 2'b01;
+                cp4 = 2'b01;
             end else begin
                 if(a[1]&~b[1]) begin
-                    s = 2'b10;
+                    cp4 = 2'b10;
                 end else if (~a[1]&b[1]) begin
-                    s = 2'b01;
+                    cp4 = 2'b01;
                 end else begin
                     if(a[0]&~b[0]) begin
-                        s = 2'b10;
+                        cp4 = 2'b10;
                     end else if (~a[0]&b[0]) begin
-                        s = 2'b01;
+                        cp4 = 2'b01;
                     end else begin
-                        s = 2'b11;
+                        cp4 = 2'b11;
                     end
                 end
             end
         end
     endfunction
+
+    assign s = cp4(a,b);
 endmodule
 
 module lshift (a,c,s);
@@ -104,95 +125,97 @@ module lshift (a,c,s);
     input [1:0] c;
     output [3:0] s;
 
-    function [3:0] lshift;
+    function [3:0] lshifter;
         input [3:0] a;
         input [1:0] c;
 
         case (c)
-            2'b11 : lshift = {a[0],3'b000};
-            2'b10 : lshift = {a[1:0],2'b00};
-            2'b01 : lshift = {a[2:0],1'b0};
-            2'b00 : lshift = {a};
-            default : lshift = 4'b000;
+            2'b11 : lshifter = {a[0],3'b000};
+            2'b10 : lshifter = {a[1:0],2'b00};
+            2'b01 : lshifter = {a[2:0],1'b0};
+            2'b00 : lshifter = {a};
+            default : lshifter = 4'b000;
         endcase
     endfunction
+
+    assign s = lshifter(a, c);
 endmodule
+
+
+module div4once(a, b, c, s, ar, sr);
+    input [3:0] a, b, s;
+    input [1:0] c;
+    output [3:0] ar, sr;
+
+    wire [3:0] bx;
+    wire [1:0] cy;
+    wire [3:0] sw;
+    //wire [7:0] ret;
+    reg [3:0] sz, az;
+
+    lshift lc (b, c, bx);
+    comp4 cxv (a, bx, cy);
+    FA4b4b fx (a, bx, 1'b1, ar);
+    lshift ls (4'b0001, c, sw);
+
+    always @ (*) begin
+        if(c == cy) begin
+            sz = s | sw;
+            az = ar;
+        end else begin
+            sz = s;
+            az = a;
+        end
+    end
+
+    assign sr = sz;
+    assign ar = az;
+endmodule
+
 
 module div4 (a,b,s,r);
     input [3:0] a, b;
     output [3:0] s, r;
+    reg [3:0] so;
 
-    wire [3:0] b3, b2, b1, b0;
-    wire [1:0] s3, s2, s1, s0;
-    wire [3:0] a3, a2, a1, a0;
+    wire [3:0] s3, s2, s1, s0;
+    wire [3:0] av3,av2,av1,av0;
+    wire [3:0] sv3,sv2,sv1,sv0;
 
+    div4once d3 (a  , b, 2'b11, s3, av3, sv3);
+    div4once d2 (av3, b, 2'b10, s2, av2, sv2);
+    div4once d1 (av2, b, 2'b01, s1, av1, sv1);
+    div4once d0 (av1, b, 2'b00, s0, av0, sv0);
 
-    function [7:0] div4r;
-        input [3:0] a, b;
-
-        div4r = 4'b0000;
-
-        lshift l3 (b, 2'b11, b3);
-        comp4 c3 (a, b3, s3);
-        if (s3==2'b10) begin
-            div4r = div4r|4'b1000;
-            FA4b5b FA3 (a, b3, 1'b1, a3);
-        end else begin
-            assign a3 = a;
-        end
-
-        lshift l2 (b, 2'b10, b2);
-        comp4 c2 (a, b2, s2);
-        if (s2 == 2'b10) begin
-            div4r = div4r | 4'b0100;
-            FA4b5b FA2 (a3, b2, 1'b1, a2);
-        end else begin
-            assign a2 = a3;
-        end
-
-        lshift l1 (b, 2'b01, b1);
-        comp4 c1 (a, b1, s1);
-        if (s1 == 2'b10) begin
-            div4r = div4r | 4'b0010;
-            FA4b5b FA1 (a2, b1, 1'b1, a1);
-        end else begin
-            assign a1 = a2;
-        end
-
-        lshift l0 (b, 2'b00, b0);
-        comp4 c0 (a, b0, s0);
-        if (s0 == 2'b10) begin
-            div4r = div4r | 4'b0001;
-            FA4b5b FA0 (a1, b0, 1'b0, a0);
-        end else begin
-            assign a0 = a1;
-        end
-    endfunction
-
+    assign s = 4'b0000 | sv3 | sv2 | sv1 | sv0;
+    //assign s = so;
+    assign r = av0;
 endmodule
 
-module ff_test;
-    reg [3:0] a,b;
-    wire [7:0] s;
 
-    MULTI4b8b M (a,b,s);
+module divtest;
+    reg [3:0] a, b;
+    wire [3:0] s, r;
+
+    div4 M (a,b,s,r);
 
     initial begin;
-        $dumpfile("multi.vcd");    // CKTKWave による波形表示のためのシミュレーション結果出力ファイル名指定
+        $dumpfile("div.vcd");    // CKTKWave による波形表示のためのシミュレーション結果出力ファイル名指定
         $dumpvars(0);        // すべての信号を表示対象とするための設定
-        $monitor("%4t a:%d b:%d s:%d", $time, a, b, s);    // 表示設定
+        $monitor("%4t a:%d b:%d s:%dr:%d", $time, a, b, s, r);    // 表示設定
 
-        a = 4'b0000;
+        a = 4'b1111;
+        b = 4'b0001;
+        #10
+        a = 4'b1111;
+        b = 4'b0010;
+        #10
+        a = 4'b1111;
         b = 4'b0011;
         #10
-        a = 4'b0110;
-        b = 4'b0011;
-        #10
-        a = 4'b1001;
-        b = 4'b0011;
-        #10
-        a = 4'b1100;
-        b = 4'b1011;
+        a = 4'b1111;
+        b = 4'b0100;
         #10 $finish;
     end                // シミュレーションの終了指示
 endmodule
+

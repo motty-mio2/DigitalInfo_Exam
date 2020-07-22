@@ -1,16 +1,26 @@
-comp1 c3 (a[3], b[3], w3);
-    if (w3 == 2'b11) begin
-        comp1 c2 (a[2], b[2], w2);
-        if (w2 == 2'b11) begin
-            comp1 c1 (a[1], b[1], w1);
-            if (w1 == 2'b11) begin
-                comp1 c0 (a[0], b[0], s);
-            end else begin
-                assign s = w1;
-            end
-        end else begin
-            assign s = w2;
-        end
-    end else begin
-        assign s = w3;
-    end
+
+module test;
+    reg [3:0] a,b;
+    wire [7:0] s;
+
+    MULTI4b8b M (a,b,s);
+
+    initial begin;
+        $dumpfile("multi.vcd");    // CKTKWave による波形表示のためのシミュレーション結果出力ファイル名指定
+        $dumpvars(0);        // すべての信号を表示対象とするための設定
+        $monitor("%4t a:%d b:%d s:%d", $time, a, b, s);    // 表示設定
+
+        a = 4'b0000;
+        b = 4'b0011;
+        #10
+        a = 4'b0110;
+        b = 4'b0011;
+        #10
+        a = 4'b1001;
+        b = 4'b0011;
+        #10
+        a = 4'b1100;
+        b = 4'b0100;
+        #10 $finish;
+    end                // シミュレーションの終了指示
+endmodule
