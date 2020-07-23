@@ -47,17 +47,17 @@ module ALU (a, b, f, y);
             mainALU = (a+b);
         end else if(f==5'b00011) begin
             mainALU = (a-b);
-            /*
+
         end else if(f==5'b01000) begin
              mainALU = a&b;
         end else if(f==5'b01100) begin
             mainALU = a|b;
 
         end else if(f==5'b00000) begin
-            mainALU = {0, a[3:1]};
+            mainALU = {1'b0, a[3:1]};
         end else if(f==5'b10000) begin
-            mainALU = {a[2:0], 0};
-            */
+            mainALU = {a[2:0], 1'b0};
+
         end else begin
             mainALU = 4'b0000;
         end
