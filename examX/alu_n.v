@@ -10,15 +10,16 @@ module FA4b5b (a, b, mo, c);
     input mo;
     //0:plus, 1:minus
     output [4:0] c;
-    wire c1,c2,c3;
+    wire c1, c2, c3, c4;
 
     FA f1 (a[0], b[0]^mo, mo, c[0], c1);
     FA f2 (a[1], b[1]^mo, c1, c[1], c2);
     FA f3 (a[2], b[2]^mo, c2, c[2], c3);
-    FA f4 (a[3], b[3]^mo, c3, c[3], c[4]);
+    FA f4 (a[3], b[3]^mo, c3, c[3], c4);
+    assign c[4] = c4^mo;
 endmodule
 
-module MULIT1x4 (a,b,s);
+module MULTI1x4 (a,b,s);
     input [3:0] a;
     input b;
     output [3:0] s;
@@ -32,10 +33,10 @@ module MULTI4b8b (a,b,s);
     wire [3:0] ab0, ab1, ab2, ab3;
     wire [4:0] c1, c2, c3;
 
-    MULIT1x4 m0 (a, b[0], ab0);
-    MULIT1x4 m1 (a, b[1], ab1);
-    MULIT1x4 m2 (a, b[2], ab2);
-    MULIT1x4 m3 (a, b[3], ab3);
+    MULTI1x4 m0 (a, b[0], ab0);
+    MULTI1x4 m1 (a, b[1], ab1);
+    MULTI1x4 m2 (a, b[2], ab2);
+    MULTI1x4 m3 (a, b[3], ab3);
 
     assign s[0] = a[0]&b[0];
     FA4b5b f1 (.a({1'b0,ab0[3:1]}), .b(ab1), .mo(1'b0), .c(c1));
@@ -130,11 +131,12 @@ module div4 (a,b,s,r);
     assign s = as1 [3:0] | sv0;
 endmodule
 
-module ALU (a, b, f, v, y);
+module ALU (a, b, f, CLK, CLR, v, y);
     input [3:0] a,b;
     input [4:0] f;
-    input v;
+    input CLK, CLR, v;
     output [3:0] y;
+    reg [3:0] y;
 
     wire [4:0] adder, minus;
     FA4b5b p4 (a, b, 1'b0, adder);
@@ -146,50 +148,97 @@ module ALU (a, b, f, v, y);
     wire [3:0] divis, remai;
     div4 di4 (a, b, divis, remai);
 
-    assign y = aluo(a, b, f, v);
-
-    function [3:0] aluo;
-        input[3:0] a,b;
-        input [4:0] f;
-        input v;
-
-        casex (f)
-            5'b00010 : aluo = v ? {3'b000, adder[4]} : adder[3:0]; //足し算
-            5'b00011 : aluo = v ? {3'b000, ~minus[4]} : minus[3:0]; //引き算
-            5'b01000 : aluo = a&b; //AND
-            5'b01100 : aluo = a|b; //OR
-            5'b00000 : aluo = {a[2:0], 1'b0}; //左シフト
-            5'b10000 : aluo = {1'b0, a[3:1]}; //右シフト
-            5'b00100 : aluo = v ? multi[7:4] : multi[3:0]; //掛け算
-            5'b00110 : aluo = v ? remai : divis; //割り算
-            default : aluo = 5'b00000;
-        endcase
-    endfunction
+    always @ (posedge CLK or negedge CLR) begin
+        if (~CLR) begin
+            assign y = 4'b0000;
+        end else begin
+            casex (f)
+                5'b00010 : y = v ? {3'b000, adder[4]} : adder[3:0]; //足し算
+                5'b00011 : y = v ? {minus[4], minus[4], minus[4], minus[4]} : minus[3:0]; //引き算
+                5'b01000 : y = a&b; //AND
+                5'b01100 : y = a|b; //OR
+                5'b00000 : y = {a[2:0], 1'b0}; //左シフト
+                5'b10000 : y = {1'b0, a[3:1]}; //右シフト
+                5'b00100 : y = v ? multi[7:4] : multi[3:0]; //掛け算
+                5'b00110 : y = v ? remai : divis; //割り算
+                default : y= 4'b0000;
+            endcase
+        end
+    end
 endmodule
 
-module fa4b4b_test;
+module ALU_test;
     reg [3:0] a, b;
     reg [4:0] f;
-    reg v;
+    reg clk, clr, v;
     wire [3:0] c;
 
-    ALU mainALU (a,b,f,v,c);
+    ALU mainALU (a, b, f, clk, clr, v, c);
 
     initial begin;
         $dumpfile("alun.vcd");    // CKTKWave による波形表示のためのシミュレーション結果出力ファイル名指定
         $dumpvars(0);        // すべての信号を表示対象とするための設定
-        $monitor("%4t a:%d b:%d f:%b v:%d c:%b", $time, a, b, f, v, c);    // 表示設定
+        $monitor("%4t a:%d b:%d f:%b CLK:%b CLR:%b v:%d c:%b", $time, a, b, f, clk, clr, v, c);    // 表示設定
 
+        #0
+        clr=1;
         a = 4'b1110;
         b = 4'b0110;
+        clk=0;
+        #1
+        clr=0;
+        #2
+        clr=1;
+        #2
+        v=1'b1;
+        f=5'b00010;
         #5
+        v=1'b0;
+        #5
+        v=1'b1;
+        f=5'b00011;
+        #5
+        v=1'b0;
+        #5
+        f=5'b01000;
+        #5
+        f=5'b01100;
+        #5
+        f=5'b00000;
+        #5
+        f=5'b10000;
+        #5
+        v=1'b1;
+        f=5'b00100;
+        #5
+        v=1'b0;
+        #5
+        f=5'b00110;
+        #5
+        v=1'b1;
+        #5
+        f=5'b11111;
+
+
+        #0
+        a = 4'b1110;
+        b = 4'b0110;
+        clk=0;
+        #1
+        clr=0;
+        #2
+        clr=1;
+        #2
         v=1'b1;
         f=5'b11111;
         #5
+        v=1'b1;
+        f=5'b00010;
+        #5
         v=1'b0;
-        f=5'b00011;
         #5
         v=1'b1;
+        f=5'b00011;
         #5
         v=1'b0;
         #5
@@ -213,5 +262,8 @@ module fa4b4b_test;
         f=5'b11111;
         #5 $finish;
     end                // シミュレーションの終了指示
+
+    always #(5)
+        clk <= ~clk;
 endmodule
 
