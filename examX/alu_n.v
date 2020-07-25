@@ -137,6 +137,7 @@ module ALU (a, b, f, CLK, CLR, v, y);
     input CLK, CLR, v;
     output [3:0] y;
     reg [3:0] y;
+    reg state;
 
     wire [4:0] adder, minus;
     FA4b5b p4 (a, b, 1'b0, adder);
@@ -147,12 +148,14 @@ module ALU (a, b, f, CLK, CLR, v, y);
 
     wire [3:0] divis, remai;
     div4 di4 (a, b, divis, remai);
-
-    always @ (posedge CLK or negedge CLR) begin
-        if (~CLR) begin
-            assign y = 4'b0000;
+// or
+    always @ (posedge CLK, negedge CLR) begin
+        if (CLR==1'b0) begin
+            state = 1'b1;
+            y = 4'b0000;
         end else begin
-            casex (f)
+            state = 1'b0;
+            case (f)
                 5'b00010 : y = v ? {3'b000, adder[4]} : adder[3:0]; //足し算
                 5'b00011 : y = v ? {minus[4], minus[4], minus[4], minus[4]} : minus[3:0]; //引き算
                 5'b01000 : y = a&b; //AND
@@ -161,7 +164,7 @@ module ALU (a, b, f, CLK, CLR, v, y);
                 5'b10000 : y = {1'b0, a[3:1]}; //右シフト
                 5'b00100 : y = v ? multi[7:4] : multi[3:0]; //掛け算
                 5'b00110 : y = v ? remai : divis; //割り算
-                default : y= 4'b0000;
+                default  : y = 4'b0000;
             endcase
         end
     end
@@ -184,83 +187,81 @@ module ALU_test;
         clr=1;
         a = 4'b1110;
         b = 4'b0110;
+        v=1'b1;
         clk=0;
         #1
         clr=0;
-        #2
+        #1
         clr=1;
         #2
-        v=1'b1;
         f=5'b00010;
-        #5
+        #10
         v=1'b0;
-        #5
+        #10
         v=1'b1;
         f=5'b00011;
-        #5
+        #10
         v=1'b0;
-        #5
+        #10
         f=5'b01000;
-        #5
+        #10
         f=5'b01100;
-        #5
+        #10
         f=5'b00000;
-        #5
+        #10
         f=5'b10000;
-        #5
+        #10
         v=1'b1;
         f=5'b00100;
-        #5
+        #10
         v=1'b0;
-        #5
+        #10
         f=5'b00110;
-        #5
+        #10
         v=1'b1;
-        #5
+        #10
         f=5'b11111;
 
 
         #0
-        a = 4'b1110;
-        b = 4'b0110;
-        clk=0;
-        #1
+        a = 4'b0110;
+        b = 4'b1010;
         clr=0;
         #2
         clr=1;
-        #2
+        #3
         v=1'b1;
         f=5'b11111;
-        #5
+        #10
         v=1'b1;
         f=5'b00010;
-        #5
+        #10
         v=1'b0;
-        #5
+        #10
         v=1'b1;
         f=5'b00011;
-        #5
+        #10
         v=1'b0;
-        #5
+        #10
         f=5'b01000;
-        #5
+        #10
         f=5'b01100;
-        #5
+        #10
         f=5'b00000;
-        #5
+        #10
         f=5'b10000;
-        #5
+        #10
         v=1'b1;
         f=5'b00100;
-        #5
+        #10
         v=1'b0;
-        #5
+        #10
         f=5'b00110;
-        #5
+        #10
         v=1'b1;
-        #5
+        #10
         f=5'b11111;
-        #5 $finish;
+        #10 $finish;
     end                // シミュレーションの終了指示
 
     always #(5)
