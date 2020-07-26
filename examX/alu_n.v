@@ -131,24 +131,28 @@ module div4 (a,b,s,r);
     assign s = as1 [3:0] | sv0;
 endmodule
 
-module ALU (a, b, f, CLK, CLR, v, y);
+module ALU (a, b, f, CLK, CLR, save, load, v, y);
     input [3:0] a,b;
     input [4:0] f;
     input CLK, CLR, v;
+    input save, load;
     output [3:0] y;
-    reg [3:0] y;
+    reg [3:0] y, mem;
     reg state;
+    wire [3:0] usenum;
+
+    assign usenum = load ? mem : a;
 
     wire [4:0] adder, minus;
-    FA4b5b p4 (a, b, 1'b0, adder);
-    FA4b5b d4 (a, b, 1'b1, minus);
+    FA4b5b p4 (usenum, b, 1'b0, adder);
+    FA4b5b d4 (usenum, b, 1'b1, minus);
 
     wire [7:0] multi;
-    MULTI4b8b m4 (a, b, multi);
+    MULTI4b8b m4 (usenum, b, multi);
 
     wire [3:0] divis, remai;
-    div4 di4 (a, b, divis, remai);
-// or
+    div4 di4 (usenum, b, divis, remai);
+
     always @ (posedge CLK, negedge CLR) begin
         if (CLR==1'b0) begin
             state = 1'b1;
@@ -157,15 +161,19 @@ module ALU (a, b, f, CLK, CLR, v, y);
             state = 1'b0;
             case (f)
                 5'b00010 : y = v ? {3'b000, adder[4]} : adder[3:0]; //足し算
-                5'b00011 : y = v ? {minus[4], minus[4], minus[4], minus[4]} : minus[3:0]; //引き算
-                5'b01000 : y = a&b; //AND
-                5'b01100 : y = a|b; //OR
-                5'b00000 : y = {a[2:0], 1'b0}; //左シフト
+                5'b00011 : y = v ? {minus[4], minus[4], minus[4], minus[4]}
+                                : minus[3:0]; //引き算
+                5'b01000 : y = usenum&b; //AND
+                5'b01100 : y = usenum|b; //OR
+                5'b00000 : y = {usenum[2:0], 1'b0}; //左シフト
                 5'b10000 : y = {1'b0, a[3:1]}; //右シフト
                 5'b00100 : y = v ? multi[7:4] : multi[3:0]; //掛け算
                 5'b00110 : y = v ? remai : divis; //割り算
                 default  : y = 4'b0000;
             endcase
+        end
+        if (save==1'b1) begin
+            mem = y;
         end
     end
 endmodule
@@ -173,36 +181,43 @@ endmodule
 module ALU_test;
     reg [3:0] a, b;
     reg [4:0] f;
-    reg clk, clr, v;
+    reg clk, clr, save, load, v;
     wire [3:0] c;
 
-    ALU mainALU (a, b, f, clk, clr, v, c);
+    ALU mainALU (a, b, f, clk, clr, save, load, v, c);
 
     initial begin;
         $dumpfile("alun.vcd");    // CKTKWave による波形表示のためのシミュレーション結果出力ファイル名指定
         $dumpvars(0);        // すべての信号を表示対象とするための設定
-        $monitor("%4t a:%d b:%d f:%b CLK:%b CLR:%b v:%d c:%b", $time, a, b, f, clk, clr, v, c);    // 表示設定
+        $monitor("%4t a:%b b:%b f:%b CLK:%b CLR:%b save:%b load:%b v:%b c:%b", $time, a, b, f, clk, clr, save, load, v, c);    // 表示設定
 
         #0
         clr=1;
         a = 4'b1110;
         b = 4'b0110;
         v=1'b1;
+        save = 1'b0;
+        load = 1'b0;
         clk=0;
         #1
         clr=0;
         #1
         clr=1;
-        #2
+        #3
         f=5'b00010;
         #10
         v=1'b0;
         #10
         v=1'b1;
         f=5'b00011;
+        save=1'b1;
         #10
+        save=1'b0;
         v=1'b0;
         #10
+        load = 1'b1;
+        #10
+        load = 1'b0;
         f=5'b01000;
         #10
         f=5'b01100;
